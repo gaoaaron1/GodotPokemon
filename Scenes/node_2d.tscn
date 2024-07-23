@@ -1,0 +1,77 @@
+[gd_scene load_steps=13 format=3 uid="uid://dsbgmepfkkx8k"]
+
+[ext_resource type="Texture2D" uid="uid://c4maufvtynmgr" path="res://icon.svg" id="1_k67yt"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="2_oguww"]
+[ext_resource type="Texture2D" uid="uid://hp7o6j26yt0e" path="res://Assets/left.png" id="3_ryqss"]
+[ext_resource type="Texture2D" uid="uid://b30sxk1smwj2t" path="res://Assets/right.png" id="4_e84rn"]
+[ext_resource type="Texture2D" uid="uid://darknrnxjewm1" path="res://Assets/up.png" id="5_xrxfw"]
+[ext_resource type="Texture2D" uid="uid://boxqlvdc0sfs3" path="res://Assets/down.png" id="6_63xi7"]
+[ext_resource type="Texture2D" uid="uid://de11sv5mplxc7" path="res://Assets/Joey_Sprites.png" id="7_8ptla"]
+
+[sub_resource type="Animation" id="Animation_5w0kw"]
+resource_name = "down"
+
+[sub_resource type="Animation" id="Animation_3pq47"]
+resource_name = "left"
+
+[sub_resource type="Animation" id="Animation_s8lde"]
+resource_name = "up"
+
+[sub_resource type="Animation" id="Animation_ax3l8"]
+resource_name = "right"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ejw3j"]
+_data = {
+"down": SubResource("Animation_5w0kw"),
+"left": SubResource("Animation_3pq47"),
+"right": SubResource("Animation_ax3l8"),
+"up": SubResource("Animation_s8lde")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(152, 103)
+texture = ExtResource("1_k67yt")
+script = ExtResource("2_oguww")
+
+[node name="Left" type="TouchScreenButton" parent="."]
+position = Vector2(32, 272)
+scale = Vector2(0.517, 0.5)
+texture_normal = ExtResource("3_ryqss")
+passby_press = true
+action = "left"
+
+[node name="Right" type="TouchScreenButton" parent="."]
+position = Vector2(160, 272)
+scale = Vector2(0.518, 0.5)
+texture_normal = ExtResource("4_e84rn")
+passby_press = true
+action = "right"
+
+[node name="Up" type="TouchScreenButton" parent="."]
+position = Vector2(96, 208)
+scale = Vector2(0.518, 0.5)
+texture_normal = ExtResource("5_xrxfw")
+passby_press = true
+action = "up"
+
+[node name="Down" type="TouchScreenButton" parent="."]
+position = Vector2(96, 336)
+scale = Vector2(0.518, 0.5)
+texture_normal = ExtResource("6_63xi7")
+passby_press = true
+action = "down"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(515, 262)
+texture = ExtResource("7_8ptla")
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+libraries = {
+"": SubResource("AnimationLibrary_ejw3j")
+}
