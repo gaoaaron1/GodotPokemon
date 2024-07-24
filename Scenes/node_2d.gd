@@ -8,10 +8,13 @@ var direction_map = {
 	"down": Vector2(0, 1)
 }
 
+var sprite
+var animation
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	sprite = $Red_Sprite
+	animation = $Animation
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -19,8 +22,7 @@ func _process(delta):
 	var movement = Vector2()
 	
 	for action in direction_map.keys(): 
-		if Input.get_action_strength(action):
+		if Input.is_action_pressed(action):
+			animation.play('action')
 			movement += direction_map[action]
-	
-	position += movement * speed * delta
-	rotation_degrees += 1
+			sprite.position += movement * speed * delta

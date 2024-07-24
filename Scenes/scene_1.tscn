@@ -1,0 +1,144 @@
+[gd_scene load_steps=13 format=3 uid="uid://dsbgmepfkkx8k"]
+
+[ext_resource type="Texture2D" uid="uid://hp7o6j26yt0e" path="res://Assets/left.png" id="3_bsmp0"]
+[ext_resource type="Texture2D" uid="uid://b30sxk1smwj2t" path="res://Assets/right.png" id="4_1hliq"]
+[ext_resource type="Texture2D" uid="uid://darknrnxjewm1" path="res://Assets/up.png" id="5_02hfs"]
+[ext_resource type="Texture2D" uid="uid://boxqlvdc0sfs3" path="res://Assets/down.png" id="6_lnmcs"]
+[ext_resource type="Script" path="res://Scenes/Player.gd" id="7_lwvsu"]
+[ext_resource type="Texture2D" uid="uid://brk14e0pmeg3w" path="res://Assets/Red_Sprite.png" id="7_opmp3"]
+
+[sub_resource type="Animation" id="Animation_5w0kw"]
+resource_name = "down"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Red_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_3pq47"]
+resource_name = "left"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Red_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_s8lde"]
+resource_name = "up"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Red_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_ax3l8"]
+resource_name = "right"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Red_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_uqaxr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Red_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ejw3j"]
+_data = {
+"RESET": SubResource("Animation_uqaxr"),
+"down": SubResource("Animation_5w0kw"),
+"left": SubResource("Animation_3pq47"),
+"right": SubResource("Animation_ax3l8"),
+"up": SubResource("Animation_s8lde")
+}
+
+[node name="Scene_1" type="Node2D"]
+position = Vector2(54, 11)
+
+[node name="Left" type="TouchScreenButton" parent="."]
+position = Vector2(32, 272)
+scale = Vector2(0.517, 0.5)
+texture_normal = ExtResource("3_bsmp0")
+passby_press = true
+action = "left"
+
+[node name="Right" type="TouchScreenButton" parent="."]
+position = Vector2(160, 272)
+scale = Vector2(0.518, 0.5)
+texture_normal = ExtResource("4_1hliq")
+passby_press = true
+action = "right"
+
+[node name="Up" type="TouchScreenButton" parent="."]
+position = Vector2(96, 208)
+scale = Vector2(0.518, 0.5)
+texture_normal = ExtResource("5_02hfs")
+passby_press = true
+action = "up"
+
+[node name="Down" type="TouchScreenButton" parent="."]
+position = Vector2(96, 336)
+scale = Vector2(0.518, 0.5)
+texture_normal = ExtResource("6_lnmcs")
+passby_press = true
+action = "down"
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("7_lwvsu")
+
+[node name="Red_Sprite" type="Sprite2D" parent="Player"]
+position = Vector2(387, 255)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("7_opmp3")
+hframes = 4
+vframes = 4
+frame = 1
+
+[node name="Animation" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_ejw3j")
+}
+speed_scale = 3.0
