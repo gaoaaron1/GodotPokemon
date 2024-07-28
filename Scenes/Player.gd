@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 var speed = 200
 var direction_map = {
@@ -24,8 +24,8 @@ func _process(delta):
 	for action in direction_map.keys(): 
 		if Input.is_action_pressed(action):
 			animation.play(action)
-			movement += direction_map[action]
-			sprite.position += movement * speed * delta
+			movement += direction_map[action] * speed * delta
+			move_and_collide(movement)
 			return
 	animation.stop()
 
